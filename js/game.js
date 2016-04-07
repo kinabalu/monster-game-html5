@@ -33,22 +33,7 @@ var update = function (modifier) {
 	if (gamelib.spritesCollide(hero, monster)) {
 		++monstersCaught;
 		reset();
-	} else {
-
-		if(monsterDirection == 0) {
-			if(monster.x > 10) {
-				monster.x -= monsterSpeed;
-			} else {
-				monsterDirection = 1;
-			}
-		} else if(monsterDirection == 1) {
-			if(monster.x < 500) {
-				monster.x += monsterSpeed;
-			} else {
-				monsterDirection = 0;
-			}
-		}
-	}
+	} 
 };
 
 // Draw everything
