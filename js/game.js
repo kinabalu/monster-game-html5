@@ -11,9 +11,6 @@ var monster = gamelib.getSprite("monster");
 hero.speed = 256;
 var monstersCaught = 0;
 
-var monsterDirection = 0;
-var monsterSpeed = 4;
-
 // Reset the game when the player catches a monster
 var reset = function () {
 	hero.moveCenter(gamelib.canvas);
@@ -33,7 +30,7 @@ var update = function (modifier) {
 	if (gamelib.spritesCollide(hero, monster)) {
 		++monstersCaught;
 		reset();
-	} 
+	}
 };
 
 // Draw everything
