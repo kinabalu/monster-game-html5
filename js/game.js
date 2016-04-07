@@ -20,11 +20,6 @@ var reset = function () {
 	monster.moveRandom(gamelib.canvas);
 };
 
-var moveHeroUp = function() {
-	hero.y -= hero.speed * modifier;
-};
-
-
 // Update game objects
 var update = function (modifier) {
 	gamelib.processKeystroke({
