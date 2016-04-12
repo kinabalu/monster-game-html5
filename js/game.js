@@ -9,10 +9,12 @@ var hero = gamelib.getSprite("hero");
 var monster = gamelib.getSprite("monster");
 
 hero.speed = 256;
+monster.speed = 320;
 var monstersCaught = 0;
 
 var monsterDirection = 0;
-var monsterSpeed = 4;
+var monsterHorizontal = 0;
+var changeHappened = false;
 
 // Reset the game when the player catches a monster
 var reset = function () {
@@ -35,19 +37,41 @@ var update = function (modifier) {
 		reset();
 	} else {
 
-		if(monsterDirection == 0) {
-			if(monster.x > 10) {
-				monster.x -= monsterSpeed;
-			} else {
-				monsterDirection = 1;
-			}
-		} else if(monsterDirection == 1) {
-			if(monster.x < 500) {
-				monster.x += monsterSpeed;
-			} else {
-				monsterDirection = 0;
-			}
+		elapsedTime = Math.round(gamelib.elapsedTime() / 1000);
+		if(elapsedTime % 5 == 0 && !changeHappened) {
+				monsterDirection = gamelib.randomBetween(0, 3);
+				changeHappened = true;
+		} else if(elapsedTime % 5 != 0) {
+				changeHappened = false;
 		}
+
+		// console.log("Elapsed time:", gamelib.elapsedTime());
+		if(monsterDirection == 0) {
+				if(monster.x < 500) {
+					monster.x += monster.speed * modifier;
+				} else {
+					monsterDirection = 1;
+				}
+		} else if(monsterDirection == 1) {
+				if(monster.x > 5) {
+					monster.x -= monster.speed * modifier;
+				} else {
+					monsterDirection = 0;
+				}
+		} else if(monsterDirection == 2) {
+				if(monster.y < 475) {
+					monster.y += monster.speed * modifier;
+				} else {
+						monsterDirection = 3;
+				}
+		} else if(monsterDirection == 3) {
+				if(monster.y > 5) {
+					monster.y -= monster.speed * modifier;
+				} else {
+					monsterDirection = 2;
+				}
+		}
+
 	}
 };
 
